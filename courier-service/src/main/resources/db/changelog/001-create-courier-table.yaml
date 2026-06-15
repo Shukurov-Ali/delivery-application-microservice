@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001
+      author: ali
+      changes:
+        - createTable:
+            tableName: couriers
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: full_name
+                  type: VARCHAR(255)
+
+              - column:
+                  name: phone_number
+                  type: VARCHAR(50)
+
+              - column:
+                  name: status
+                  type: VARCHAR(20)
