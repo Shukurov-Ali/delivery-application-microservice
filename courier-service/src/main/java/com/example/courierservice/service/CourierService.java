@@ -5,6 +5,8 @@ import com.example.courierservice.dao.repository.CourierRepository;
 import com.example.courierservice.dto.CourierRequestDto;
 import com.example.courierservice.dto.CourierResponseDto;
 import com.example.courierservice.enums.CourierStatus;
+import com.example.courierservice.exception.CourierAlreadyExistsException;
+import com.example.courierservice.exception.CourierNotFoundException;
 import com.example.courierservice.mapper.CourierMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,7 @@ public class CourierService {
 
     private void checkCourierIfExists(String phoneNumber) {
         if (courierRepository.existsByPhoneNumber(phoneNumber)) {
-            throw new RuntimeException("Phone number already exists");
+            throw new CourierAlreadyExistsException("Phone number already exists");
         }
     }
 
@@ -42,13 +44,13 @@ public class CourierService {
     }
     public CourierResponseDto getAvailableCourier() {
         var courier = courierRepository.findFirstByStatus(CourierStatus.FREE)
-                .orElseThrow(() -> new RuntimeException("No available courier found"));
+                .orElseThrow(() -> new CourierNotFoundException("No available courier found"));
 
         return CourierMapper.mapToResponse(courier);
     }
     public CourierEntity fetchCourierIfExists(Long id) {
         return courierRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No courier found with id"));
+                .orElseThrow(() -> new CourierNotFoundException("No courier found with id " + id));
     }
     public void markAsBusy(Long id){
         var courier = fetchCourierIfExists(id);
