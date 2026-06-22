@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CourierResponseDto {
+    private Long id;
     private String fullName;
     private String phoneNumber;
     private CourierStatus status;

@@ -15,6 +15,7 @@ public class CourierMapper {
     }
     public static CourierResponseDto mapToResponse(CourierEntity entity) {
         var responseDto = new CourierResponseDto();
+        responseDto.setId(entity.getId());
         responseDto.setFullName(entity.getFullName());
         responseDto.setPhoneNumber(entity.getPhoneNumber());
         responseDto.setStatus(entity.getStatus());

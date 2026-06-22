@@ -34,12 +34,12 @@ public class CourierController {
         return courierService.getAvailableCourier();
     }
 
-    @PatchMapping("/{id}/busy")
+    @PostMapping("/{id}/busy")
     public void markAsBusy(@PathVariable Long id) {
         courierService.markAsBusy(id);
     }
 
-    @PatchMapping("/{id}/free")
+    @PostMapping("/{id}/free")
     public void markAsFree(@PathVariable Long id) {
         courierService.markAsFree(id);
     }
