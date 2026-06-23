@@ -5,6 +5,7 @@ import com.example.courierservice.dto.CourierResponseDto;
 import com.example.courierservice.service.CourierService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ public class CourierController {
     private final CourierService courierService;
 
     @PostMapping
-    public void createCourier(@RequestBody CourierRequestDto dto) {
-        courierService.createCourier(dto);
+    public void createCourier(@Valid @RequestBody CourierRequestDto dto) {
+    courierService.createCourier(dto);
     }
 
     @GetMapping
